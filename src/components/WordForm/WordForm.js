@@ -1,11 +1,11 @@
 import React from "react";
 
-function WordForm() {
+function WordForm({ onSubmit }) {
   const [word, setWord] = React.useState("");
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    console.log(word);
+    onSubmit(word);
     setWord("");
   }
 

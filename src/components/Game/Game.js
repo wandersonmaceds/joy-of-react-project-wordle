@@ -1,6 +1,7 @@
 import React from "react";
 
 import WordForm from "../WordForm";
+import GuessList from "../GuessList";
 
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
@@ -11,9 +12,16 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
+  const [guesses, setGuesses] = React.useState([]);
+
+  function handleGuessSubmit(guess) {
+    setGuesses([...guesses, guess]);
+  }
+
   return (
     <>
-      <WordForm />
+      <GuessList guesses={guesses} />
+      <WordForm onSubmit={handleGuessSubmit} />
     </>
   );
 }
