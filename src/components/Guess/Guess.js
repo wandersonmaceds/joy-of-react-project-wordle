@@ -1,15 +1,18 @@
 import React from "react";
 
 import { range } from "../../utils";
+import { checkGuess } from "../../game-helpers";
 
-function Guess({ word }) {
-  const columns = range(0, 5).map((_) => "");
-  const letters = word ? word.split("") : columns;
+function Guess({ guess, answer }) {
+  const results = guess
+    ? checkGuess(guess, answer)
+    : range(0, 5).map((_) => "");
+
   return (
     <p className="guess">
-      {letters.map((letter, index) => (
-        <span key={index} className="cell">
-          {letter}
+      {results.map((result, index) => (
+        <span key={index} className={`cell ${result.status ?? ""}`}>
+          {result.letter ?? ""}
         </span>
       ))}
     </p>
